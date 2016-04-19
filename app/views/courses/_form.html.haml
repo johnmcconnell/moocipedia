@@ -5,10 +5,10 @@
       = f.text_field :title, class: 'form-control'
     .form-group
       = f.label :subject
-      = f.text_field :subject, class: 'form-control'
+      = f.text_field :subject, value: @course.subject_value, class: 'form-control'
     .form-group
       = f.label :topic
-      = f.text_field :topic, class: 'form-control'
+      = f.text_field :topic, value: @course.topic_value, class: 'form-control'
   .col-xs-12.col-sm-8.col-md-7
     .form-group
       = f.label :description
