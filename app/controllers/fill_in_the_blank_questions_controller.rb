@@ -1,11 +1,15 @@
 class FillInTheBlankQuestionsController < ApplicationController
   before_action :set_lesson, only: [:new, :create]
   before_action :set_question, only: [
-    :submit_answer, :edit, :update, :find_aliases, :build_answers
+    :submit_answer, :edit, :update, :find_aliases, :build_answers,
+    :skills
   ]
   before_action :set_answer_submission, only: [:submit_answer]
   helper :question
   respond_to :html
+
+  def skills
+  end
 
   def new
     @question = FillInTheBlankQuestion.default(lesson: @lesson)
@@ -42,8 +46,26 @@ class FillInTheBlankQuestionsController < ApplicationController
 
   def submit_answer
     if @question.correct_answer?(@answer_submission)
+      if current_user.nil?
+        flash[:warning] = "You are not logged in. Your progress is not being recorded."
+      else
+        Rating.update_elo(
+          current_user,
+          @question,
+          true,
+        )
+      end
       correct_response
     else
+      if current_user.nil?
+        flash[:warning] = "You are not logged in. Your progress is not being recorded."
+      else
+        Rating.update_elo(
+          current_user,
+          @question,
+          false,
+        )
+      end
       incorrect_response
     end
   end

@@ -11,6 +11,10 @@ class Course < ActiveRecord::Base
   validates_length_of :description, maximum: 400
   accepts_nested_attributes_for :page_content
 
+  before_validation do
+    page_content
+  end
+
   def subject=(s)
     if !s.nil? && s.kind_of?(String)
       s = Subject.find_or_initialize_by(value: s)

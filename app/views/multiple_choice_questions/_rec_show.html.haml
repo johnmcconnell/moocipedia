@@ -9,6 +9,8 @@
   = link_to 'Skills', skills_multiple_choice_question_path(@question)
 = @question
 = form_for @question, url: submit_answer_multiple_choice_question_path(@question), method: :post do |f|
+  - extra_params.each do |(key, value)|
+    = f.hidden_field key, value: value
   - @question.answers.each do |answer|
     .form-group
       = f.submit value: answer.text, name: 'answer', class: 'btn btn-primary'

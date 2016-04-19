@@ -1,0 +1,9 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-body
+      %h2 #{current_user.email}
+      - @question = @questions.first
+      - @extra_params = { on_recommendations: true }
+      - if !@question.nil?
+        %p
+          = render partial: @question.decorate.to_partial_path(:rec_show), locals: { extra_params: @extra_params }

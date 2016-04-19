@@ -1,0 +1,12 @@
+.col-xs-12.col-sm-7.col-md-5.col-lg-4
+  .panel.panel-default
+    .panel-body
+      %h2 Top Skills
+      - @question.top_ratings_and_percent(20).each do |r|
+        - rating = r.fetch(:rating)
+        - percentile = r.fetch(:percentile)
+        .col-xs-12
+          %p
+            %strong
+              #{rating.topic.value} &rarr; #{rating.score}: #{percentile} &#37;
+
