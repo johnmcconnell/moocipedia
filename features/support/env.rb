@@ -12,7 +12,21 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+success = true
 After do |scenario|
-  Cucumber.wants_to_quit = true if scenario.failed?
-  save_and_open_page if scenario.failed?
+  if scenario.failed?
+    success = false
+    Cucumber.wants_to_quit = true
+    save_and_open_page
+  end
+end
+
+at_exit do
+  e = $!.status
+
+  if success && e < 2
+    exit(0)
+  end
+
+  exit(e)
 end
