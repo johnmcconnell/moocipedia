@@ -14,7 +14,7 @@ env:
     - TEST_SUITE="cucumber"
 
 before_script:
-  - bundle
+  - . .env.travis
 
 script:
   - bundle exec rake $TEST_SUITE
