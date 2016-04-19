@@ -16,10 +16,12 @@ class FeedbackController < ApplicationController
   private
 
   def feedback_send(feedback)
-    if Rails.env.test? && ENV['ADMIN_EMAIL'].nil?
-      return
-    end
     FeedbackMailer.feedback_email(feedback, current_user).deliver
+  end
+
+  if Rails.env.test? && ENV['ADMIN_EMAIL'].nil?
+    def feedback_send(feedback)
+    end
   end
 
   def success_message
