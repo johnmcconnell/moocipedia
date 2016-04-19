@@ -1,0 +1,22 @@
+language: ruby
+
+rvm:
+  - 2.3
+
+gemfile:
+  - Gemfile
+
+cache: bundler
+
+env:
+  matrix:
+    - TEST_SUITE="spec"
+    - TEST_SUITE="cucumber"
+
+before_script: "bundle update"
+
+script:
+  - bundle exec rake $TEST_SUITE
+
+notifications:
+  email: false
