@@ -1,5 +1,8 @@
 language: ruby
 
+services:
+  - postgres
+
 rvm:
   - 2.3.0
 
@@ -15,6 +18,8 @@ env:
 
 before_script:
   - . .env.travis
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
 
 script:
   - bundle exec rake $TEST_SUITE
