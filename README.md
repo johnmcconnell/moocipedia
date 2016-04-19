@@ -1,4 +1,6 @@
 Moocipedia
+[![Build
+Status](https://travis-ci.org/johnmcconnell/moocipedia.svg?branch=master)](https://travis-ci.org/johnmcconnell/moocipedia)
 ========
 * Moocipedia is a community generated open classroom platform.
 * It is currently hosted at http://moocipedia.herokuapp.com
