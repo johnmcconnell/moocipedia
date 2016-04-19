@@ -6,6 +6,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [] do
+    collection do
+      get 'details'
+      get 'recommendations'
+    end
+  end
+
   resources :lessons do
     member do
       put 'move_higher', as: 'move_higher'
@@ -29,12 +36,14 @@ Rails.application.routes.draw do
 
   resources :multiple_choice_questions do
     member do
-      post :submit_answer
+      get 'skills'
+      post 'submit_answer'
     end
   end
 
   resources :fill_in_the_blank_questions do
     member do
+      get 'skills'
       get 'find_aliases'
       post 'build_answers'
       post 'submit_answer'

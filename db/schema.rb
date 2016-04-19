@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202180723) do
+ActiveRecord::Schema.define(version: 20160419054732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,15 +35,17 @@ ActiveRecord::Schema.define(version: 20141202180723) do
 
   create_table "courses", force: true do |t|
     t.string   "title"
-    t.string   "subject"
-    t.string   "topic"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
     t.integer  "page_content_id"
+    t.integer  "subject_id"
+    t.integer  "topic_id"
   end
 
   add_index "courses", ["page_content_id"], name: "index_courses_on_page_content_id", using: :btree
+  add_index "courses", ["subject_id"], name: "index_courses_on_subject_id", using: :btree
+  add_index "courses", ["topic_id"], name: "index_courses_on_topic_id", using: :btree
 
   create_table "feedbacks", force: true do |t|
     t.integer  "user_id"
@@ -128,6 +130,35 @@ ActiveRecord::Schema.define(version: 20141202180723) do
   end
 
   add_index "quiz_activities", ["question_id", "question_type"], name: "index_quiz_activities_on_question_id_and_question_type", using: :btree
+
+  create_table "ratings", force: true do |t|
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.integer  "topic_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["rateable_id", "rateable_type"], name: "index_ratings_on_rateable_id_and_rateable_type", using: :btree
+  add_index "ratings", ["rateable_type", "rateable_id", "topic_id", "score"], name: "quick_query_index", using: :btree
+  add_index "ratings", ["topic_id"], name: "index_ratings_on_topic_id", using: :btree
+
+  create_table "subjects", force: true do |t|
+    t.string   "value",      limit: 200
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subjects", ["value"], name: "index_subjects_on_value", unique: true, using: :btree
+
+  create_table "topics", force: true do |t|
+    t.string   "value",      limit: 200
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topics", ["value"], name: "index_topics_on_value", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

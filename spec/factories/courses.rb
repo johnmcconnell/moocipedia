@@ -4,9 +4,10 @@ FactoryGirl.define do
   factory :course do
     sequence :id
     title "Test Title"
-    subject "Test Subject"
-    topic "Test Topic"
     description "Test Description"
+
+    association :subject, factory: :subject
+    association :topic, factory: :topic
 
     factory :course_with_lessons do
       lessons { create_list(:lesson, 3) }
@@ -18,9 +19,10 @@ FactoryGirl.define do
 
     factory :new_course do
       title "New Title"
-      subject "New Subject"
-      topic "New Topic"
       description "New Description"
+
+      association :subject, factory: :new_subject
+      association :topic, factory: :new_topic
     end
   end
 end

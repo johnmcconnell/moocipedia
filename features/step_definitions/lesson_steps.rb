@@ -1,5 +1,3 @@
-attr_reader :lesson
-
 def lesson_with_pages
   @lesson ||= FactoryGirl.create(:lesson_with_pages)
 end
@@ -56,7 +54,8 @@ end
 
 Then(/^I should see new content on the lesson page$/) do
   page_content = easy_html_remove(
-    lesson.pages.first.content.page_content.to_s)
+    @lesson.pages.first.content.page_content.to_s,
+  )
   expect(page).to have_content(page_content)
 end
 

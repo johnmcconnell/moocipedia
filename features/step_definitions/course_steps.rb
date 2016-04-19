@@ -15,10 +15,21 @@ def course_with_lessons
 end
 
 def course_to_params(course)
-  course.slice(:title, :description, :subject, :topic)
-    .inject({}) do |params, (key, value)|
-    params.tap { |p| p[key.capitalize] = value }
+  res = course.slice(
+    :title,
+    :description,
+    :subject,
+    :topic,
+  ).inject({}) do |params, (key, value)|
+    params.tap do |p|
+      p[key.capitalize] = value
+    end
   end
+
+  res['Subject'] = course.subject.value
+  res['Topic'] = course.subject.value
+
+  res
 end
 
 ##### GIVEN #####

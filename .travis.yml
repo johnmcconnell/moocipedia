@@ -1,0 +1,28 @@
+language: ruby
+
+services:
+  - postgres
+
+rvm:
+  - 2.3.0
+
+gemfile:
+  - Gemfile
+
+cache: bundler
+
+env:
+  matrix:
+    - TEST_SUITE="spec"
+    - TEST_SUITE="cucumber"
+
+before_script:
+  - . .env.travis
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
+
+script:
+  - bundle exec rake $TEST_SUITE
+
+notifications:
+  email: false
