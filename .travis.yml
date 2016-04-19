@@ -13,7 +13,8 @@ env:
     - TEST_SUITE="spec"
     - TEST_SUITE="cucumber"
 
-before_script: "bundle update"
+before_script:
+  - bundle
 
 script:
   - bundle exec rake $TEST_SUITE
