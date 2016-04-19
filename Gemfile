@@ -59,6 +59,7 @@ group :test do
 end
 
 group :test, :development do
+  gem 'pry'
   gem 'rubocop'
   gem 'factory_girl_rails', require: false
   gem 'faker'
