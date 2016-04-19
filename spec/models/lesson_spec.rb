@@ -33,7 +33,7 @@ RSpec.describe Lesson, type: :model do
     it 'sets the #postion as the size of the lesson.activities' do
       expect do
         new_lesson.update(course: course)
-      end.to change { new_lesson.position }.from(nil).to(4)
+      end.to change { new_lesson.position }.from(nil).to(2)
     end
   end
 end

@@ -16,7 +16,7 @@ RSpec.describe Page, type: :model do
   describe '#lesson=' do
     it 'sets the #postion as the size of the lesson.activities' do
       expect { page.update(lesson: lesson) }.to change { page.position }
-        .from(nil).to(4)
+        .from(nil).to(2)
     end
   end
 
