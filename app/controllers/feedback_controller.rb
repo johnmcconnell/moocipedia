@@ -5,6 +5,7 @@ class FeedbackController < ApplicationController
 
   def create
     feedback = Feedback.new(feedback_params)
+    binding.pry
     if feedback.save && feedback_send(feedback)
       flash[:success] = success_message
     else
