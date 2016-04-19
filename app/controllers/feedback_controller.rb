@@ -21,6 +21,7 @@ class FeedbackController < ApplicationController
 
   if Rails.env.test? && ENV['ADMIN_EMAIL'].nil?
     def feedback_send(feedback)
+      true
     end
   end
 
