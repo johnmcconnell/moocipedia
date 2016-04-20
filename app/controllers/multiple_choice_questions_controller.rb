@@ -59,7 +59,10 @@ class MultipleChoiceQuestionsController < ApplicationController
   private
 
   def submitted_from_recommendations?
-    q = params.fetch("multiple_choice_question")
+    q = params["multiple_choice_question"]
+    if q.nil?
+      return false
+    end
     r = q["on_recommendations"]
     !r.nil?
   end
