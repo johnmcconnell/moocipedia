@@ -43,10 +43,10 @@
             - else
               %li=link_to 'Sign up', new_user_registration_path
               %li=link_to 'Log in', new_user_session_path
-    .container
-      .row
+    .container-fluid
+      .col-xs-12
         = render 'layouts/flash_messages'
-      .row
+      .col-xs-12
         = yield
       %footer
         %p &copy; #{t('app_name')} 2014
