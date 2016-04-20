@@ -16,11 +16,12 @@
           %tr
             %th Answer
             %th Add to question
-          - @aliases.each do |_alias|
+          - @aliases.each_with_index do |_alias, i|
             %tr
               %td= _alias.text
-              %td= check_box_tag "aliases[][add]"
-              = hidden_field_tag "aliases[][text]", _alias.text
+              %td
+                = check_box_tag "aliases[]"
+                = hidden_field_tag "aliases[][text]", _alias.text
       .form-group
         = link_to 'Cancel', :back, class: 'btn btn-default'
         = submit_tag 'Update Question', class: 'btn btn-primary'

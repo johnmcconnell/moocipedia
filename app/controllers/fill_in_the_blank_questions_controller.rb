@@ -82,14 +82,33 @@ class FillInTheBlankQuestionsController < ApplicationController
   end
 
   def answers_from_aliases
-    answers = aliases_params.keep_if { |a| a['add'] == '1' }
+    a_ps = aliases_params
+    allowed = {}
+    a_ps.each do |a|
+      valid_keys = a.keys.delete_if do |key|
+        key != '0' && key.to_i == 0
+      end
+      valid_keys.each do |key|
+        allowed[key] = true
+      end
+    end
+
+    idx = 0
+    answers = a_ps.keep_if do |a|
+      r = allowed[String(idx)]
+      idx += 1
+      r
+    end
+
     answers.map! do |a|
       FillInTheBlankAnswer.new(text: a['text'])
     end
   end
 
   def aliases_params
-    params.permit(aliases: [:add, :text]).require(:aliases)
+    params.require(
+      :aliases
+    )
   end
 
   def correct_response
