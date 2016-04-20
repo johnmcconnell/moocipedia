@@ -73,7 +73,7 @@ class FillInTheBlankQuestionsController < ApplicationController
   private
 
   def submitted_from_recommendations?
-    q = params["multiple_choice_question"]
+    q = params["fill_in_the_blank_question"]
     if q.nil?
       return false
     end
