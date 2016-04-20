@@ -12,10 +12,19 @@ class PageDecorator < PartialDecorator
   def next_link
     if lower_item.nil?
       helpers = Rails.application.routes.url_helpers
-      {
-        text: 'Finish lesson!',
-        path:  helpers.finished_course_path(course),
-      }
+      lower_lesson = lesson.lower_item
+
+      if lower_lesson.nil?
+        {
+          text: 'Finish Course!',
+          path:  helpers.finished_course_path(course),
+        }
+      else
+        {
+          text: "Continue on to Lesson: #{lower_lesson.name}",
+          path: lower_lesson,
+        }
+      end
     else
       {
         text: content.decorate.next_page_text,
