@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [
     :show, :edit, :update, :destroy,
-    :edit_lessons
+    :edit_lessons, :finished,
   ]
   respond_to :html
 
@@ -24,6 +24,9 @@ class CoursesController < ApplicationController
   end
 
   def edit
+  end
+
+  def finished
   end
 
   def edit_lessons

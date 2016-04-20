@@ -49,7 +49,6 @@ class UsersController < ApplicationController
       end
 
       if question.nil?
-        binding.pry
         fail "found: #{r} needs matching question"
       end
 

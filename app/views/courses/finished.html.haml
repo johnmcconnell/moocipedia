@@ -1,0 +1,12 @@
+.col-xs-12.col-md-8
+  .col-xs-12
+    .page-header
+      %h1
+        Congratulations! You completed #{@course.title}!
+    .panel.panel-primary
+      .panel-body
+        %p
+          It is time to celebrate yeah!
+        %p
+          Please enjoy some more courses
+          = link_to 'here!', course_path

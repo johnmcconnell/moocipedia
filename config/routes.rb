@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :courses, shallow: true, except: [:delete] do
     member do
       get 'edit_lessons'
+      get 'finished'
     end
   end
 
