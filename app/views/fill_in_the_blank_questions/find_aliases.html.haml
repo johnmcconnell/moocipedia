@@ -20,7 +20,7 @@
             %tr
               %td= _alias.text
               %td
-                = check_box_tag "aliases[]"
+                = check_box_tag "aliases[][#{i}]"
                 = hidden_field_tag "aliases[][text]", _alias.text
       .form-group
         = link_to 'Cancel', :back, class: 'btn btn-default'
