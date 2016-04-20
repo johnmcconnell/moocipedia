@@ -2,7 +2,6 @@
   .panel.panel-default
     .panel-body
       %h2 #{current_user.email}
-      - @question = @questions.first
       - @extra_params = { on_recommendations: true }
       - if !@question.nil?
         %p

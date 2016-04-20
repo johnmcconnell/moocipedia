@@ -72,6 +72,12 @@ class FillInTheBlankQuestionsController < ApplicationController
 
   private
 
+  def submitted_from_recommendations?
+    q = params.fetch("multiple_choice_question")
+    r = q["on_recommendations"]
+    !r.nil?
+  end
+
   def answers_from_aliases
     answers = aliases_params.keep_if { |a| a['add'] == '1' }
     answers.map! do |a|
@@ -85,13 +91,21 @@ class FillInTheBlankQuestionsController < ApplicationController
 
   def correct_response
     flash[:success] = 'Great Job!'
-    redirect_to @question.page.decorate.next_link[:path]
+    if submitted_from_recommendations?
+      redirect_to recommendations_users_path
+    else
+      redirect_to @question.page.decorate.next_link[:path]
+    end
   end
 
   def incorrect_response
     flash[:danger] =
       "Incorrect response '#{@answer_submission}'"
-    redirect_to @question.page
+    if submitted_from_recommendations?
+      redirect_to recommendations_users_path
+    else
+      redirect_to @question.page
+    end
   end
 
   def set_question

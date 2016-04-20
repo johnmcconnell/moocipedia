@@ -66,6 +66,12 @@ class UsersController < ApplicationController
 
       (expected_p - p).abs
     end
+
+    percentage = 0.3
+
+    @questions.slice!(0, Integer(percentage * @questions.length))
+
+    @question = @questions.sample
   end
 end
 
