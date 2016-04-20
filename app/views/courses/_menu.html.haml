@@ -3,7 +3,7 @@
   = link_to 'Edit Page', edit_course_path(@course), class: 'btn btn-default'
 %div.list-group
   %h4 Lessons
-  - @course.lessons.order(:created_at).each do |lesson|
+  - @course.lessons.order(:position).each do |lesson|
     = link_to lesson, class: 'list-group-item' do
       %h5
         = lesson.name
