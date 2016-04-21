@@ -13,7 +13,7 @@ module Rateable
     top = top_ratings(top_n)
 
     Rating.transaction do
-      total_count = User.count
+      total_count = self.class.count
 
       top.map do |r|
         count = Rating.where(
